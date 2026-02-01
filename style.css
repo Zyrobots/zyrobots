@@ -50,17 +50,17 @@ body {
   text-align:center;
   transition: background 0.5s;
 }
-/* Discord logo onderaan, scrollt mee */
+/* Discord logo onderaan content */
 .discord-footer {
-  text-align: center;
-  margin: 40px 0 20px; /* ruimte vanaf content */
+  text-align: center;       /* gecentreerd onder de tekst */
+  margin: 40px 0 60px;      /* wat ruimte boven en onder */
 }
 
 .discord-footer a img {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  animation: pulse 2s infinite; /* puls effect */
+  animation: pulse 2s infinite;  /* puls effect */
   transition: transform 0.2s;
 }
 
@@ -68,7 +68,7 @@ body {
   transform: scale(1.2);
 }
 
-/* puls animatie */
+/* puls animatie voor glow */
 @keyframes pulse {
   0%   { filter: drop-shadow(0 0 5px #7289da); }
   50%  { filter: drop-shadow(0 0 20px #7289da); }
