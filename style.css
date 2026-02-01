@@ -50,31 +50,34 @@ body {
   text-align:center;
   transition: background 0.5s;
 }
-/* Discord logo onderaan, gecentreerd */
+/* Discord logo onderaan, scrollt mee */
 .discord-footer {
-  position: fixed;
-  bottom: 10px;      /* helemaal onderaan */
-  left: 50%;         /* horizontaal gecentreerd */
-  transform: translateX(-50%);
-  z-index: 100;
+  text-align: center;
+  margin: 40px 0 20px; /* ruimte vanaf content */
 }
 
-.discord-footer img {
+.discord-footer a img {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  display: block;    /* zorgt dat img zichtbaar is */
-  transition: transform 0.2s, filter 0.2s;
+  animation: pulse 2s infinite; /* puls effect */
+  transition: transform 0.2s;
 }
 
-.discord-footer img:hover {
+.discord-footer a img:hover {
   transform: scale(1.2);
-  filter: drop-shadow(0 0 15px #7289da);
+}
+
+/* puls animatie */
+@keyframes pulse {
+  0%   { filter: drop-shadow(0 0 5px #7289da); }
+  50%  { filter: drop-shadow(0 0 20px #7289da); }
+  100% { filter: drop-shadow(0 0 5px #7289da); }
 }
 
 /* mobiel: iets kleiner */
 @media (max-width:768px) {
-  .discord-footer img {
+  .discord-footer a img {
     width: 40px;
     height: 40px;
   }
