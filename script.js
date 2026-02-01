@@ -33,8 +33,9 @@ const ctx = canvas.getContext('2d');
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
-let particleCount = width < 768 ? 30 : 80; // minder particles op mobiel
-const maxDist = width < 768 ? 100 : 200;   // minder lijnafstand op mobiel
+const particles = [];
+const particleCount = window.innerWidth < 768 ? 40 : 80; // minder op mobiel
+const maxDist = 200;
 
 const mouse = { x: null, y: null };
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -48,7 +49,6 @@ class Particle {
     this.vy = (Math.random() - 0.5) * 1;
     this.radius = 2 + Math.random() * 2;
   }
-
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
@@ -57,26 +57,20 @@ class Particle {
     ctx.shadowBlur = 5;
     ctx.fill();
   }
-
   update() {
     this.x += this.vx;
     this.y += this.vy;
-
     if (this.x < 0 || this.x > width) this.vx *= -1;
     if (this.y < 0 || this.y > height) this.vy *= -1;
-
     this.draw();
   }
 }
 
-// init particles
-let particles = [];
 for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
-// connect particles + mouse
 function connectParticles() {
-  for (let a=0; a<particles.length; a++){
-    for (let b=a+1; b<particles.length; b++){
+  for (let a=0;a<particles.length;a++){
+    for (let b=a+1;b<particles.length;b++){
       let dx = particles[a].x - particles[b].x;
       let dy = particles[a].y - particles[b].y;
       let dist = Math.sqrt(dx*dx + dy*dy);
@@ -113,15 +107,7 @@ function animate() {
 }
 animate();
 
-// resize canvas
 window.addEventListener('resize', () => {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
-  // update particleCount & maxDist bij resize
-  particleCount = width < 768 ? 30 : 80;
-  maxDist = width < 768 ? 100 : 200;
-
-  // herinitialiseer particles
-  particles = [];
-  for (let i=0;i<particleCount;i++) particles.push(new Particle());
 });
