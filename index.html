@@ -1,119 +1,85 @@
-/* ------------------------------
-   Scroll reveal & hamburger menu
---------------------------------*/
-const items = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('active');
-  });
-}, { threshold: 0.2 });
-items.forEach(i => observer.observe(i));
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
+  <!-- Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
+  <!-- Logo -->
+  <div class="logo reveal">
+    <img src="logo.png" alt="Logo">
+  </div>
 
-document.querySelectorAll('#nav-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-  });
-});
+  <!-- Hamburger -->
+  <div id="hamburger" class="hamburger reveal">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
-/* ------------------------------
-   Canvas background network
---------------------------------*/
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
+  <!-- Nav Menu -->
+  <nav id="nav-menu">
+    <a href="#hero">Home</a>
+    <a href="#why-us">Waarom ons</a>
+    <a href="#projects">Projecten</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-let width = canvas.width = window.innerWidth;
-let height = canvas.height = window.innerHeight;
+  <!-- Hero Section -->
+  <section class="hero reveal" id="hero">
+    <h1>Welkom</h1>
+    <p>Bekijk mijn projecten en werk</p>
+  </section>
 
-const particles = [];
-const particleCount = window.innerWidth < 768 ? 40 : 80; // mobiel minder, desktop meer
-const maxDist = 200;
+  <!-- Why Us Section -->
+  <section id="why-us" class="reveal">
+    <div class="grid">
+      <div class="box big-box reveal">Snelle levering</div>
+      <div class="box big-box reveal">Kwaliteit gegarandeerd</div>
+      <div class="box big-box reveal">Ondersteuning 24/7</div>
+    </div>
+  </section>
 
-const mouse = { x: null, y: null };
-window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+  <!-- Projects Section -->
+  <section id="projects" class="reveal">
+    <div class="grid column">
+      <div class="project reveal">
+        <strong>Project 1</strong>
+        Een korte beschrijving van het project.
+        <a href="#" class="discord-btn">Bekijk op Discord</a>
+      </div>
+      <div class="project reveal">
+        <strong>Project 2</strong>
+        Een korte beschrijving van het project.
+        <a href="#" class="discord-btn">Bekijk op Discord</a>
+      </div>
+      <div class="project reveal">
+        <strong>Project 3</strong>
+        Een korte beschrijving van het project.
+        <a href="#" class="discord-btn">Bekijk op Discord</a>
+      </div>
+    </div>
+  </section>
 
-class Particle {
-  constructor() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
-    this.vx = (Math.random() - 0.5) * 1;
-    this.vy = (Math.random() - 0.5) * 1;
-    this.radius = 2 + Math.random() * 2;
-  }
+  <!-- Contact Section -->
+  <section id="contact" class="reveal">
+    <h2>Contacteer mij</h2>
+    <p>Email: voorbeeld@email.com</p>
+  </section>
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(37,99,235,0.9)';
-    ctx.shadowColor = 'rgba(37,99,235,0.7)';
-    ctx.shadowBlur = 5;
-    ctx.fill();
-  }
+  <!-- Discord Footer -->
+  <footer class="discord-footer reveal">
+    <a href="https://discord.com" target="_blank">
+      <img src="discord-icon.png" alt="Discord">
+    </a>
+  </footer>
 
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-
-    if (this.x < 0 || this.x > width) this.vx *= -1;
-    if (this.y < 0 || this.y > height) this.vy *= -1;
-
-    this.draw();
-  }
-}
-
-for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-
-// Connect all particles + mouse
-function connectParticles() {
-  for (let a = 0; a < particles.length; a++) {
-    for (let b = a + 1; b < particles.length; b++) {
-      let dx = particles[a].x - particles[b].x;
-      let dy = particles[a].y - particles[b].y;
-      let dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < maxDist) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
-        ctx.lineWidth = 1;
-        ctx.moveTo(particles[a].x, particles[a].y);
-        ctx.lineTo(particles[b].x, particles[b].y);
-        ctx.stroke();
-      }
-    }
-    // connect to mouse
-    if(mouse.x && mouse.y){
-      let dx = particles[a].x - mouse.x;
-      let dy = particles[a].y - mouse.y;
-      let dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist < maxDist){
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
-        ctx.lineWidth = 1;
-        ctx.moveTo(particles[a].x, particles[a].y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-function animate() {
-  ctx.clearRect(0,0,width,height);
-  particles.forEach(p => p.update());
-  connectParticles();
-  requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener('resize', () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-});
+  <script src="script.js"></script>
+</body>
+</html>
