@@ -21,7 +21,7 @@ body {
 /* hamburger icon */
 .hamburger {
   position: fixed;
-  top: 15px;
+  top: 20px;
   right: 20px;
   width: 30px;
   height: 22px;
@@ -29,7 +29,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  z-index: 20;
+  z-index: 100;
 }
 
 .hamburger span {
@@ -41,11 +41,11 @@ body {
   transition: 0.3s;
 }
 
-/* nav menu hidden initially */
+/* nav menu hidden by default */
 #nav-menu {
   position: fixed;
   top: 0;
-  right: -250px; /* hidden */
+  right: -100%;
   width: 250px;
   height: 100%;
   background: rgba(10,13,20,0.95);
@@ -53,8 +53,8 @@ body {
   flex-direction: column;
   padding: 80px 20px;
   gap: 30px;
-  transition: right 0.3s;
-  z-index: 15;
+  transition: right 0.3s ease;
+  z-index: 90;
 }
 
 #nav-menu a {
@@ -67,7 +67,7 @@ body {
   color: var(--blue);
 }
 
-/* menu active state */
+/* menu active */
 #nav-menu.active {
   right: 0;
 }
@@ -76,25 +76,20 @@ body {
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px,5px);
 }
-
 .hamburger.active span:nth-child(2) {
   opacity: 0;
 }
-
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px,-6px);
 }
 
 /* hero & sections */
-header, section {
-  padding:100px 8%;
-}
-
+header, section { padding:100px 8%; }
 .hero h1 { font-size:clamp(2.2rem,6vw,3.2rem); letter-spacing:2px; }
 .hero p { margin-top:10px; color:var(--muted); }
-
 h2 { margin-bottom:40px; font-size:clamp(1.6rem,5vw,2rem); }
 
+/* grids onder elkaar */
 .grid.column {
   display:flex;
   flex-direction:column;
@@ -103,8 +98,10 @@ h2 { margin-bottom:40px; font-size:clamp(1.6rem,5vw,2rem); }
   margin:0 auto;
 }
 
+/* Why Us grote boxes */
 .why .big-box { padding:50px; font-size:1.2rem; }
 
+/* box styling + glow */
 .box {
   background:var(--card);
   padding:30px;
