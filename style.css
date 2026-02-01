@@ -1,3 +1,6 @@
+/* ------------------------------ */
+/* General body & canvas setup */
+/* ------------------------------ */
 body, html {
   margin: 0;
   padding: 0;
@@ -7,7 +10,6 @@ body, html {
   overflow-x: hidden;
 }
 
-/* Canvas */
 #bg-canvas {
   position: fixed;
   top: 0;
@@ -17,17 +19,19 @@ body, html {
   height: 100%;
 }
 
+/* ------------------------------ */
 /* Logo */
 .logo {
   position: fixed;
   top: 30px;
   left: 40px;
   z-index: 100;
-  max-width: 150px;
+  max-width: 180px;
 }
 .logo img { width: 100%; height: auto; }
 @media (max-width:768px) { .logo { display: none; } }
 
+/* ------------------------------ */
 /* Hamburger */
 .hamburger {
   position: fixed;
@@ -56,7 +60,8 @@ body, html {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Nav */
+/* ------------------------------ */
+/* Nav menu */
 #nav-menu {
   position: fixed;
   top: 0;
@@ -80,72 +85,69 @@ body, html {
 }
 #nav-menu a:hover { background-color: #2563eb; }
 
+/* ------------------------------ */
 /* Hero */
-.hero { text-align: center; padding: 180px 20px 100px 20px; }
-.hero h1 { font-size: 80px; margin-bottom: 20px; }
-.hero p { font-size: 28px; color: #aaa; }
+.hero { text-align: center; padding: 200px 20px 120px 20px; }
+.hero h1 { font-size: 90px; margin-bottom: 20px; }
+.hero p { font-size: 30px; color: #aaa; }
 
+/* ------------------------------ */
 /* Why Us */
-.grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 100px; }
+.grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 50px; margin-bottom: 100px; }
 .box.big-box {
   background: rgba(37,99,235,0.1);
   border-radius: 20px;
-  padding: 30px 25px;  /* kleiner */
-  min-width: 180px;    /* kleiner */
-  flex: 1 1 180px;
+  padding: 40px 30px;
+  min-width: 200px;
+  flex: 1 1 200px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   transition: all 0.3s ease;
 }
 .box.big-box:hover {
   border: 2px solid #2563eb;
-  box-shadow: 0 0 20px #2563eb;
+  box-shadow: 0 0 25px #2563eb;
   transform: translateY(-5px);
 }
 
+/* ------------------------------ */
 /* Projects */
-.grid.column { display: flex; flex-direction: column; gap: 20px; }
+.grid.column { display: flex; flex-direction: column; gap: 25px; }
 .project {
   background: rgba(37,99,235,0.1);
   border: 2px solid rgba(37,99,235,0.3);
   border-radius: 20px;
-  padding: 20px 25px; /* kleiner */
-  font-size: 16px;     /* kleiner */
-  line-height: 1.5;
+  padding: 25px 30px;
+  font-size: 18px;
+  line-height: 1.6;
   transition: all 0.3s ease;
 }
 .project:hover {
   border-color: #2563eb;
-  box-shadow: 0 0 15px #2563eb;
+  box-shadow: 0 0 20px #2563eb;
   transform: translateY(-3px);
 }
-.project strong { font-size: 18px; display: block; margin-bottom: 10px; }
-
-/* Discord button */
+.project strong { font-size: 20px; display: block; margin-bottom: 10px; }
 .discord-btn {
   display: inline-block;
+  margin-top: 10px;
   padding: 8px 16px;
   background-color: #7289da;
-  color: white;
+  color: #fff;
   border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s;
-  margin-top: 10px;
-  font-size: 14px;
 }
-.discord-btn:hover {
-  background-color: #5b6eae;
-  transform: scale(1.05);
-}
+.discord-btn:hover { background-color: #5b6eae; transform: scale(1.05); }
 
-/* Discord footer */
+/* ------------------------------ */
+/* Discord Footer */
 .discord-footer { text-align: center; margin: 60px 0 80px; }
 .discord-footer a img {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  animation: pulse 2s infinite;
   display: block;
   margin: 0 auto;
   transition: transform 0.3s;
@@ -154,25 +156,24 @@ body, html {
   transform: scale(1.2);
   filter: drop-shadow(0 0 15px #7289da);
 }
-@keyframes pulse {
-  0%   { filter: drop-shadow(0 0 5px #7289da); }
-  50%  { filter: drop-shadow(0 0 20px #7289da); }
-  100% { filter: drop-shadow(0 0 5px #7289da); }
-}
 
+/* ------------------------------ */
 /* Contact */
 section#contact { text-align: center; margin-bottom: 120px; }
 
+/* ------------------------------ */
 /* Reveal */
 .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
+/* ------------------------------ */
 /* Responsive */
 @media (max-width:768px) {
   .grid { flex-direction: column; align-items: center; }
   .grid.column { flex-direction: column; }
-  .hero h1 { font-size: 40px; }
+  .hero h1 { font-size: 45px; }
   .hero p { font-size: 18px; }
   .discord-footer a img { width: 40px; height: 40px; }
   .discord-btn { padding: 6px 14px; font-size: 12px; }
+  .project { font-size: 16px; padding: 18px 20px; }
 }
