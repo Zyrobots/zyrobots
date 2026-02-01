@@ -1,3 +1,4 @@
+// scroll reveal animation
 const items = document.querySelectorAll('.reveal');
 
 const observer = new IntersectionObserver(entries => {
