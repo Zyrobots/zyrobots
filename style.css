@@ -54,23 +54,19 @@ h2 {
   font-size:clamp(1.6rem,5vw,2rem);
 }
 
-/* grids */
-.grid {
-  max-width:900px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+/* grids onder elkaar */
+.grid.column {
+  display:flex;
+  flex-direction:column;
   gap:25px;
+  max-width:500px;
+  margin:0 auto;
 }
 
-/* Why Us grote boxes */
-.why .grid.big {
-  max-width:1100px;
-}
-
-.big-box {
+/* Why Us grotere boxes */
+.why .big-box {
   padding:50px;
-  font-size:1.1rem;
+  font-size:1.2rem;
 }
 
 /* box styling + glow */
@@ -92,7 +88,8 @@ h2 {
   transform:translateY(-6px);
 }
 
-.box h3 {
+.box h3, .box small {
+  display:block;
   margin-bottom:8px;
 }
 
@@ -112,5 +109,5 @@ h2 {
 @media (max-width:600px) {
   nav { gap:18px; }
   header, section { padding:90px 6%; }
-  .big-box { padding:35px; font-size:1rem; }
+  .big-box { padding:35px; font-size:1.1rem; }
 }
