@@ -11,11 +11,6 @@
 <!-- Canvas background -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- Logo (alleen desktop) -->
-<div class="logo">
-  <img src="https://cdn.discordapp.com/attachments/1418945744408412243/1467260254176936009/Zyro_Logo.png?ex=698064d8&is=697f1358&hm=f8259d8cfe7adf9c90e816bf59150fd35b287853cff9d96514621764d97efce7" alt="ZyRobots Logo">
-</div>
-
 <!-- Hamburger Menu -->
 <div class="hamburger" id="hamburger">
   <span></span>
@@ -31,13 +26,33 @@
 </nav>
 
 <header class="hero reveal">
-  <h1>Zyrobots</h1>
+  <h1>Zyrobots 🤖</h1>
+  <p>Smart. Good. Fast.</p>
+</header>  
+<body>
+
+<!-- Hamburger Menu -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Navigation menu (hidden by default) -->
+<nav id="nav-menu">
+  <a href="#about">Why Us</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header class="hero reveal">
+  <h1>Zyrobots 🤖</h1>
   <p>Smart. Good. Fast.</p>
 </header>
 
 <section id="about" class="reveal why">
   <h2>Why Us</h2>
-  <div class="grid">
+  <div class="grid column">
     <div class="box big-box">💻 Clean code</div>
     <div class="box big-box">⚡ Powered by us</div>
     <div class="box big-box">🤖 Fast delivery</div>
@@ -46,36 +61,20 @@
 
 <section id="projects" class="reveal">
   <h2>Projects</h2>
-  <div class="grid column">
-
-    <!-- Project 1 -->
-    <div class="box big-box project">
-      🤖 <strong>Eindhoven, The Netherlands</strong><br>
-      Multifunctionele custom bot gemaakt om alle andere soorten bots te vervangen.<br><br>
-      <a href="https://discord.gg/ssYbc6J9C2" target="_blank" rel="noopener" class="discord-btn">Join Discord</a>
-    </div>
-
-    <!-- Project 2 -->
-    <div class="box big-box project">
-      🌐 <strong>ZyRobots Portfolio Website</strong><br>
-      Deze website zelf, een clean en futuristisch portfolio met animaties en interactieve elementen.
-    </div>
-
+  <div class="grid projects-grid">
+    <div class="box">🚀 Project Alpha<br><small>Automation platform</small></div>
+    <div class="box">🌐 Project Beta<br><small>Portfolio website</small></div>
+    <div class="box">📱 Project Gamma<br><small>Web App</small></div>
+    <div class="box">🛠 Project Delta<br><small>Tooling</small></div>
   </div>
 </section>
 
-<!-- Discord logo footer -->
-<div class="discord-footer">
-  <a href="https://discord.gg/C7gQ7DQrEx" target="_blank" rel="noopener">
-    <img src="https://toppng.com/public/uploads/preview/discord-black-logo-11593869050tvdn0uaewo.png" alt="Discord Logo">
-  </a>
-</div>
-
 <section id="contact" class="reveal">
-  <h2>Contact</h2>
+  <h2>Contact ✉️</h2>
   <p>Zyrobots@outlook.com</p>
 </section>
 
 <script src="script.js"></script>
 </body>
 </html>
+
