@@ -3,8 +3,8 @@
 --------------------------------*/
 const items = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add('active');
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('active');
   });
 }, { threshold: 0.2 });
 items.forEach(i => observer.observe(i));
@@ -33,11 +33,10 @@ const ctx = canvas.getContext('2d');
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
-const particleCount = window.innerWidth < 768 ? 40 : 80;
-const maxDist = 200;
-const particles = [];
-const mouse = { x: null, y: null };
+let particleCount = width < 768 ? 30 : 80; // minder particles op mobiel
+const maxDist = width < 768 ? 100 : 200;   // minder lijnafstand op mobiel
 
+const mouse = { x: null, y: null };
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
@@ -63,39 +62,42 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
 
-    if(this.x < 0 || this.x > width) this.vx *= -1;
-    if(this.y < 0 || this.y > height) this.vy *= -1;
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
 
     this.draw();
   }
 }
 
-for(let i=0;i<particleCount;i++) particles.push(new Particle());
+// init particles
+let particles = [];
+for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
+// connect particles + mouse
 function connectParticles() {
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      let dx = particles[i].x - particles[j].x;
-      let dy = particles[i].y - particles[j].y;
+  for (let a=0; a<particles.length; a++){
+    for (let b=a+1; b<particles.length; b++){
+      let dx = particles[a].x - particles[b].x;
+      let dy = particles[a].y - particles[b].y;
       let dist = Math.sqrt(dx*dx + dy*dy);
       if(dist < maxDist){
         ctx.beginPath();
         ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
         ctx.lineWidth = 1;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
         ctx.stroke();
       }
     }
     if(mouse.x && mouse.y){
-      let dx = particles[i].x - mouse.x;
-      let dy = particles[i].y - mouse.y;
+      let dx = particles[a].x - mouse.x;
+      let dy = particles[a].y - mouse.y;
       let dist = Math.sqrt(dx*dx + dy*dy);
       if(dist < maxDist){
         ctx.beginPath();
         ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
         ctx.lineWidth = 1;
-        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.moveTo(particles[a].x, particles[a].y);
         ctx.lineTo(mouse.x, mouse.y);
         ctx.stroke();
       }
@@ -111,7 +113,15 @@ function animate() {
 }
 animate();
 
+// resize canvas
 window.addEventListener('resize', () => {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
+  // update particleCount & maxDist bij resize
+  particleCount = width < 768 ? 30 : 80;
+  maxDist = width < 768 ? 100 : 200;
+
+  // herinitialiseer particles
+  particles = [];
+  for (let i=0;i<particleCount;i++) particles.push(new Particle());
 });
