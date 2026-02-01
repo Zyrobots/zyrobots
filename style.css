@@ -1,6 +1,3 @@
-/* ------------------------------
-   Algemene instellingen
---------------------------------*/
 body, html {
   margin: 0;
   padding: 0;
@@ -19,8 +16,6 @@ p { margin: 0 0 10px 0; }
   top: 0;
   left: 0;
   z-index: -1;
-  width: 100%;
-  height: 100%;
 }
 
 /* Logo */
@@ -62,7 +57,9 @@ p { margin: 0 0 10px 0; }
   transform: rotate(45deg) translate(5px, 5px);
 }
 .hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
 
 /* Navigation menu */
 #nav-menu {
@@ -97,13 +94,7 @@ p { margin: 0 0 10px 0; }
 .hero p { font-size: 22px; color: #aaa; }
 
 /* Why Us */
-.grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 60px;
-}
+.grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 60px; }
 
 .box.big-box {
   background: rgba(37,99,235,0.1);
@@ -146,9 +137,7 @@ p { margin: 0 0 10px 0; }
 
 /* Discord knop in Project 1 */
 .discord-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
   padding: 10px 20px;
   background-color: #7289da;
   color: white;
@@ -162,11 +151,6 @@ p { margin: 0 0 10px 0; }
 .discord-btn:hover {
   background-color: #5b6eae;
   transform: scale(1.05);
-}
-
-.discord-btn .discord-icon {
-  width: 24px;
-  height: 24px;
 }
 
 /* Discord Footer */
