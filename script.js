@@ -1,6 +1,4 @@
-/* ------------------------------
-   Scroll reveal & hamburger menu
---------------------------------*/
+/* Scroll reveal & hamburger menu */
 const items = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -24,9 +22,7 @@ document.querySelectorAll('#nav-menu a').forEach(link => {
   });
 });
 
-/* ------------------------------
-   Canvas background network
---------------------------------*/
+/* Canvas background network */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -34,7 +30,7 @@ let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = window.innerWidth < 768 ? 40 : 80; // minder op mobiel
+const particleCount = window.innerWidth < 768 ? 40 : 80;
 const maxDist = 200;
 
 const mouse = { x: null, y: null };
