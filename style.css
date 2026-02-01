@@ -80,9 +80,17 @@ h2 { margin-bottom:50px; font-size:clamp(2rem,4vw,2.5rem); }
 
 /* grids */
 .grid.column { display:flex; flex-direction:column; gap:25px; max-width:500px; margin:0 auto; }
-.why .big-box { padding:50px; font-size:1.3rem; }
 
-/* Projects desktop grid */
+/* Why Us grid desktop */
+.why .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  max-width:1000px;
+  margin:0 auto;
+}
+
+/* Projects grid desktop */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -91,7 +99,9 @@ h2 { margin-bottom:50px; font-size:clamp(2rem,4vw,2.5rem); }
   margin: 0 auto;
 }
 
-/* box styling + glow */
+/* boxes styling */
+.why .big-box { padding:50px; font-size:1.3rem; }
+
 .box {
   background:var(--card);
   padding:30px;
@@ -120,7 +130,13 @@ h2 { margin-bottom:50px; font-size:clamp(2rem,4vw,2.5rem); }
 
 /* mobiel */
 @media (max-width:768px) {
+  .why .grid,
+  .projects-grid {
+    display:flex;
+    flex-direction:column;
+    max-width:500px;
+  }
+
   header, section { padding:80px 6%; }
   .big-box { padding:35px; font-size:1.1rem; }
-  .projects-grid { display:flex; flex-direction:column; max-width:500px; }
 }
