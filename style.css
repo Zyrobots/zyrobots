@@ -92,42 +92,21 @@ body, html {
 .hero p { font-size: 30px; color: #aaa; }
 
 /* ------------------------------ */
-/* Why Us */
+/* Boxes / Projects */
 .grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 50px; margin-bottom: 100px; }
-.box.big-box {
+.box, .project {
   background: rgba(37,99,235,0.1);
   border-radius: 20px;
-  padding: 40px 30px;
-  min-width: 200px;
-  flex: 1 1 200px;
+  padding: 30px;
   text-align: center;
-  font-size: 20px;
   transition: all 0.3s ease;
 }
-.box.big-box:hover {
-  border: 2px solid #2563eb;
+.box:hover, .project:hover {
   box-shadow: 0 0 25px #2563eb;
   transform: translateY(-5px);
 }
-
-/* ------------------------------ */
-/* Projects */
-.grid.column { display: flex; flex-direction: column; gap: 25px; }
-.project {
-  background: rgba(37,99,235,0.1);
-  border: 2px solid rgba(37,99,235,0.3);
-  border-radius: 20px;
-  padding: 25px 30px;
-  font-size: 18px;
-  line-height: 1.6;
-  transition: all 0.3s ease;
-}
-.project:hover {
-  border-color: #2563eb;
-  box-shadow: 0 0 20px #2563eb;
-  transform: translateY(-3px);
-}
-.project strong { font-size: 20px; display: block; margin-bottom: 10px; }
+.project { border: 2px solid rgba(37,99,235,0.3); font-size: 18px; }
+.project strong { display: block; margin-bottom: 10px; font-size: 20px; }
 .discord-btn {
   display: inline-block;
   margin-top: 10px;
@@ -142,24 +121,10 @@ body, html {
 .discord-btn:hover { background-color: #5b6eae; transform: scale(1.05); }
 
 /* ------------------------------ */
-/* Discord Footer */
+/* Footer */
 .discord-footer { text-align: center; margin: 60px 0 80px; }
-.discord-footer a img {
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-  transition: transform 0.3s;
-}
-.discord-footer a img:hover {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 15px #7289da);
-}
-
-/* ------------------------------ */
-/* Contact */
-section#contact { text-align: center; margin-bottom: 120px; }
+.discord-footer a img { width: 50px; height: 50px; cursor: pointer; display: block; margin: 0 auto; transition: transform 0.3s; }
+.discord-footer a img:hover { transform: scale(1.2); filter: drop-shadow(0 0 15px #7289da); }
 
 /* ------------------------------ */
 /* Reveal */
@@ -168,9 +133,8 @@ section#contact { text-align: center; margin-bottom: 120px; }
 
 /* ------------------------------ */
 /* Responsive */
-@media (max-width:768px) {
+@media (max-width:768px){
   .grid { flex-direction: column; align-items: center; }
-  .grid.column { flex-direction: column; }
   .hero h1 { font-size: 45px; }
   .hero p { font-size: 18px; }
   .discord-footer a img { width: 40px; height: 40px; }
