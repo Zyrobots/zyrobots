@@ -50,6 +50,35 @@ body {
   text-align:center;
   transition: background 0.5s;
 }
+/* Discord link onderaan gecentreerd */
+.discord-link {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.discord-link img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s, filter 0.2s;
+  cursor: pointer;
+}
+
+/* hover effect */
+.discord-link img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #7289da);
+}
+
+/* mobiel: iets kleiner */
+@media (max-width:768px) {
+  .discord-link img {
+    width: 40px;
+    height: 40px;
+  }
+}
 
 /* hamburger icon */
 .hamburger {
