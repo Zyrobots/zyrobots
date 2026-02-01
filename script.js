@@ -34,8 +34,8 @@ let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = 80;
-const maxDist = 120;
+const particleCount = 80; 
+const maxDist = 200; // grotere afstand zodat alles verbonden lijkt
 
 const mouse = { x: null, y: null };
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -45,29 +45,34 @@ class Particle {
   constructor() {
     this.x = Math.random() * width;
     this.y = Math.random() * height;
-    this.vx = (Math.random() - 0.5) * 0.7;
-    this.vy = (Math.random() - 0.5) * 0.7;
-    this.radius = 3 + Math.random() * 2;
+    this.vx = (Math.random() - 0.5) * 1;
+    this.vy = (Math.random() - 0.5) * 1;
+    this.radius = 2 + Math.random() * 2;
   }
 
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(37,99,235,0.8)';
+    ctx.fillStyle = 'rgba(37,99,235,0.9)';
+    ctx.shadowColor = 'rgba(37,99,235,0.7)';
+    ctx.shadowBlur = 5;
     ctx.fill();
   }
 
   update() {
     this.x += this.vx;
     this.y += this.vy;
+
     if (this.x < 0 || this.x > width) this.vx *= -1;
     if (this.y < 0 || this.y > height) this.vy *= -1;
+
     this.draw();
   }
 }
 
 for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
+// connect all particles + mouse
 function connectParticles() {
   for (let a=0; a<particles.length; a++){
     for (let b=a+1; b<particles.length; b++){
@@ -83,6 +88,7 @@ function connectParticles() {
         ctx.stroke();
       }
     }
+    // connect to mouse
     if(mouse.x && mouse.y){
       let dx = particles[a].x - mouse.x;
       let dy = particles[a].y - mouse.y;
