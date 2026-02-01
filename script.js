@@ -33,9 +33,8 @@ const ctx = canvas.getContext('2d');
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
-const particles = [];
-const particleCount = 80; 
-const maxDist = 200; // grotere afstand zodat alles verbonden lijkt
+let particleCount = width < 768 ? 30 : 80; // minder particles op mobiel
+const maxDist = width < 768 ? 100 : 200;   // minder lijnafstand op mobiel
 
 const mouse = { x: null, y: null };
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -70,9 +69,11 @@ class Particle {
   }
 }
 
+// init particles
+let particles = [];
 for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
-// connect all particles + mouse
+// connect particles + mouse
 function connectParticles() {
   for (let a=0; a<particles.length; a++){
     for (let b=a+1; b<particles.length; b++){
@@ -88,7 +89,6 @@ function connectParticles() {
         ctx.stroke();
       }
     }
-    // connect to mouse
     if(mouse.x && mouse.y){
       let dx = particles[a].x - mouse.x;
       let dy = particles[a].y - mouse.y;
@@ -113,7 +113,15 @@ function animate() {
 }
 animate();
 
+// resize canvas
 window.addEventListener('resize', () => {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
+  // update particleCount & maxDist bij resize
+  particleCount = width < 768 ? 30 : 80;
+  maxDist = width < 768 ? 100 : 200;
+
+  // herinitialiseer particles
+  particles = [];
+  for (let i=0;i<particleCount;i++) particles.push(new Particle());
 });
