@@ -1,50 +1,68 @@
-/* ------------------------------ */
-/* Body & Canvas Setup */
-/* ------------------------------ */
+/* ------------------------------
+   Algemene instellingen
+--------------------------------*/
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0b0c17; /* zeer donkerblauw/zwart */
-  color: #ffffff;
+  background-color: #0f0f0f;
+  color: #fff;
   overflow-x: hidden;
 }
 
+h1, h2 {
+  margin: 0 0 20px 0;
+}
+
+p {
+  margin: 0 0 10px 0;
+}
+
+/* Canvas */
 #bg-canvas {
   position: fixed;
   top: 0;
   left: 0;
   z-index: -1;
-  width: 100%;
-  height: 100%;
 }
 
-/* ------------------------------ */
-/* Logo */
+/* ------------------------------
+   Logo
+--------------------------------*/
 .logo {
   position: fixed;
-  top: 25px;
-  left: 30px;
-  z-index: 200;
-  max-width: 160px;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  max-width: 120px;
 }
-.logo img { width: 100%; height: auto; }
-@media (max-width:768px) { .logo { display: none; } }
 
-/* ------------------------------ */
-/* Hamburger */
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width:768px) {
+  .logo { display: none; }
+}
+
+/* ------------------------------
+   Hamburger menu
+--------------------------------*/
 .hamburger {
   position: fixed;
   top: 25px;
-  right: 30px;
-  width: 35px;
-  height: 25px;
+  right: 25px;
+  width: 30px;
+  height: 22px;
   cursor: pointer;
-  z-index: 210;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .hamburger span {
   display: block;
   height: 4px;
@@ -52,161 +70,201 @@ body, html {
   border-radius: 2px;
   transition: all 0.3s;
 }
+
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
-.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* ------------------------------ */
-/* Nav menu */
+/* ------------------------------
+   Navigation
+--------------------------------*/
 #nav-menu {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 260px;
+  width: 200px;
   height: 100%;
-  background-color: #0d0f23; /* donkerblauw */
+  background-color: #111;
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
-  transition: all 0.4s ease;
-  z-index: 205;
-  box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+  padding-top: 80px;
+  transition: all 0.3s;
+  z-index: 105;
 }
+
 #nav-menu.active { right: 0; }
+
 #nav-menu a {
   color: #fff;
   text-decoration: none;
-  padding: 20px 30px;
-  font-size: 20px;
-  transition: all 0.3s ease;
-  border-left: 3px solid transparent;
-}
-#nav-menu a:hover {
-  background-color: rgba(37,99,235,0.1);
-  border-left: 3px solid #2563eb;
-  padding-left: 27px;
+  padding: 15px 20px;
+  font-size: 18px;
+  transition: all 0.2s;
 }
 
-/* ------------------------------ */
-/* Hero Section */
+#nav-menu a:hover { background-color: #2563eb; }
+
+/* ------------------------------
+   Hero Section
+--------------------------------*/
 .hero {
   text-align: center;
-  padding: 180px 20px 120px 20px;
+  padding: 150px 20px 80px 20px;
 }
-.hero h1 { font-size: 80px; margin-bottom: 20px; color: #ffffff; text-shadow: 0 0 20px #2563eb; }
-.hero p { font-size: 28px; color: #aaa; }
 
-/* ------------------------------ */
-/* Boxes / Why Us & Projects */
+.hero h1 {
+  font-size: 60px;
+  color: #fff;
+}
+
+.hero p {
+  font-size: 22px;
+  color: #aaa;
+}
+
+/* ------------------------------
+   Why Us
+--------------------------------*/
 .grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 100px;
+  gap: 20px;
+  margin-bottom: 60px;
 }
 
-.box, .project {
-  background: #0d0f23; /* donkerblauw blok */
-  border-radius: 20px;
-  padding: 35px 25px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
+.box.big-box {
+  background: rgba(37,99,235,0.1);
+  border-radius: 15px;
+  padding: 30px;
   min-width: 220px;
+  flex: 1 1 200px;
+  text-align: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
 }
 
-.box:hover, .project:hover {
+.box.big-box:hover {
   border: 2px solid #2563eb;
-  box-shadow: 0 0 25px #2563eb;
+  box-shadow: 0 0 20px #2563eb;
   transform: translateY(-5px);
 }
 
-/* Box Text */
-.box {
-  font-size: 20px;
-  font-weight: 500;
-  color: #ffffff;
+/* ------------------------------
+   Projects
+--------------------------------*/
+.grid.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .project {
-  font-size: 18px;
-  color: #fff;
+  background: rgba(37,99,235,0.1);
   border: 2px solid rgba(37,99,235,0.3);
-}
-.project strong {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 22px;
-  color: #2563eb;
+  border-radius: 15px;
+  padding: 30px;
+  font-size: 18px;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  cursor: default;
 }
 
+.project:hover {
+  border-color: #2563eb;
+  box-shadow: 0 0 20px #2563eb;
+  transform: translateY(-5px);
+}
+
+.project strong {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Discord knop in Project 1 */
 .discord-btn {
   display: inline-block;
-  margin-top: 12px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background-color: #7289da;
-  color: #fff;
-  border-radius: 10px;
+  color: white;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
+  margin-top: 10px;
 }
+
 .discord-btn:hover {
   background-color: #5b6eae;
   transform: scale(1.05);
-  box-shadow: 0 0 10px #7289da;
 }
 
-/* ------------------------------ */
-/* Footer */
+/* ------------------------------
+   Discord Footer Logo
+--------------------------------*/
 .discord-footer {
   text-align: center;
-  margin: 80px 0;
+  margin: 40px 0 60px;
 }
+
 .discord-footer a img {
   width: 50px;
   height: 50px;
   cursor: pointer;
+  animation: pulse 2s infinite;
   display: block;
   margin: 0 auto;
-  transition: all 0.3s ease;
+  transition: transform 0.2s;
 }
+
 .discord-footer a img:hover {
   transform: scale(1.2);
   filter: drop-shadow(0 0 15px #7289da);
 }
 
-/* ------------------------------ */
-/* Contact Section */
-#contact {
+@keyframes pulse {
+  0%   { filter: drop-shadow(0 0 5px #7289da); }
+  50%  { filter: drop-shadow(0 0 20px #7289da); }
+  100% { filter: drop-shadow(0 0 5px #7289da); }
+}
+
+/* ------------------------------
+   Contact
+--------------------------------*/
+section#contact {
   text-align: center;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 }
 
-/* ------------------------------ */
-/* Scroll Reveal */
-.reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-.reveal.active { opacity: 1; transform: translateY(0); }
-
-/* ------------------------------ */
-/* Responsive */
-@media (max-width: 1024px){
-  .grid { gap: 25px; }
-  .hero h1 { font-size: 60px; }
-  .hero p { font-size: 22px; }
+/* ------------------------------
+   Reveal animations
+--------------------------------*/
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
 }
 
-@media (max-width:768px){
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------
+   Responsive
+--------------------------------*/
+@media (max-width:768px) {
   .grid { flex-direction: column; align-items: center; }
-  .hero h1 { font-size: 45px; }
+  .grid.column { flex-direction: column; }
+  .hero h1 { font-size: 40px; }
   .hero p { font-size: 18px; }
   .discord-footer a img { width: 40px; height: 40px; }
-  .discord-btn { padding: 6px 14px; font-size: 12px; }
-  .project, .box { width: 90%; padding: 20px; font-size: 16px; }
-  #nav-menu { width: 100%; }
+  .discord-btn { padding: 8px 16px; font-size: 14px; }
 }
