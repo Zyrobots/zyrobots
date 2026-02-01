@@ -3,85 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>ZyRobots</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Canvas Background -->
-  <canvas id="bg-canvas"></canvas>
+<!-- Canvas background -->
+<canvas id="bg-canvas"></canvas>
 
-  <!-- Logo -->
-  <div class="logo reveal">
-    <!-- Base64 of inline src zodat geen extern bestand nodig -->
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAA... (hier kan je echte base64 van logo)" alt="Logo">
+<!-- Logo (alleen desktop) -->
+<div class="logo">
+  <img src="https://cdn.discordapp.com/attachments/1418945744408412243/1467260254176936009/Zyro_Logo.png?ex=698064d8&is=697f1358&hm=f8259d8cfe7adf9c90e816bf59150fd35b287853cff9d96514621764d97efce7" alt="ZyRobots Logo">
+</div>
+
+<!-- Hamburger Menu -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Navigation menu -->
+<nav id="nav-menu">
+  <a href="#about">Why Us</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header class="hero reveal">
+  <h1>Zyrobots</h1>
+  <p>Smart. Good. Fast.</p>
+</header>
+
+<section id="about" class="reveal why">
+  <h2>Why Us</h2>
+  <div class="grid">
+    <div class="box big-box">💻 Clean code</div>
+    <div class="box big-box">⚡ Powered by us</div>
+    <div class="box big-box">🤖 Fast delivery</div>
   </div>
+</section>
 
-  <!-- Hamburger -->
-  <div id="hamburger" class="hamburger reveal">
-    <span></span>
-    <span></span>
-    <span></span>
+<section id="projects" class="reveal">
+  <h2>Projects</h2>
+  <div class="grid column">
+
+    <!-- Project 1 -->
+    <div class="box big-box project">
+      🤖 <strong>Eindhoven, The Netherlands</strong><br>
+      Multifunctionele custom bot gemaakt om alle andere soorten bots te vervangen.<br><br>
+      <a href="https://discord.gg/ssYbc6J9C2" target="_blank" rel="noopener" class="discord-btn">Join Discord</a>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="box big-box project">
+      🌐 <strong>ZyRobots Portfolio Website</strong><br>
+      Deze website zelf, een clean en futuristisch portfolio met animaties en interactieve elementen.
+    </div>
+
   </div>
+</section>
 
-  <!-- Nav Menu -->
-  <nav id="nav-menu">
-    <a href="#hero">Home</a>
-    <a href="#why-us">Waarom ons</a>
-    <a href="#projects">Projecten</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<!-- Discord logo footer -->
+<div class="discord-footer">
+  <a href="https://discord.gg/C7gQ7DQrEx" target="_blank" rel="noopener">
+    <img src="https://toppng.com/public/uploads/preview/discord-black-logo-11593869050tvdn0uaewo.png" alt="Discord Logo">
+  </a>
+</div>
 
-  <!-- Hero Section -->
-  <section class="hero reveal" id="hero">
-    <h1>Welkom</h1>
-    <p>Bekijk mijn projecten en werk</p>
-  </section>
+<section id="contact" class="reveal">
+  <h2>Contact</h2>
+  <p>Zyrobots@outlook.com</p>
+</section>
 
-  <!-- Why Us Section -->
-  <section id="why-us" class="reveal">
-    <div class="grid">
-      <div class="box reveal">Snelle levering</div>
-      <div class="box reveal">Kwaliteit gegarandeerd</div>
-      <div class="box reveal">Ondersteuning 24/7</div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="reveal">
-    <div class="grid column">
-      <div class="project reveal">
-        <strong>Project 1</strong>
-        Een korte beschrijving van het project.
-        <a href="#" class="discord-btn">Bekijk op Discord</a>
-      </div>
-      <div class="project reveal">
-        <strong>Project 2</strong>
-        Een korte beschrijving van het project.
-        <a href="#" class="discord-btn">Bekijk op Discord</a>
-      </div>
-      <div class="project reveal">
-        <strong>Project 3</strong>
-        Een korte beschrijving van het project.
-        <a href="#" class="discord-btn">Bekijk op Discord</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="reveal">
-    <h2>Contacteer mij</h2>
-    <p>Email: voorbeeld@email.com</p>
-  </section>
-
-  <!-- Discord Footer -->
-  <footer class="discord-footer reveal">
-    <a href="#">
-      <!-- Base64 Discord icon -->
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAA... (base64 hier)" alt="Discord">
-    </a>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
