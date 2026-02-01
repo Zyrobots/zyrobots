@@ -1,81 +1,119 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZyRobots</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* ------------------------------
+   Scroll reveal & hamburger menu
+--------------------------------*/
+const items = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('active');
+  });
+}, { threshold: 0.2 });
+items.forEach(i => observer.observe(i));
 
-<!-- Canvas background -->
-<canvas id="bg-canvas"></canvas>
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
 
-<!-- Logo -->
-<div class="logo">
-  <img src="https://cdn.discordapp.com/attachments/1418945744408412243/1467260254176936009/Zyro_Logo.png" alt="ZyRobots Logo">
-</div>
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+});
 
-<!-- Hamburger Menu -->
-<div class="hamburger" id="hamburger">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+document.querySelectorAll('#nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+  });
+});
 
-<!-- Navigation menu -->
-<nav id="nav-menu">
-  <a href="#about">Why Us</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
-</nav>
+/* ------------------------------
+   Canvas background network
+--------------------------------*/
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
 
-<header class="hero reveal">
-  <h1>Zyrobots</h1>
-  <p>Smart. Good. Fast.</p>
-</header>
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
-<section id="about" class="reveal why">
-  <h2>Why Us</h2>
-  <div class="grid">
-    <div class="box big-box">💻 Clean code</div>
-    <div class="box big-box">⚡ Powered by us</div>
-    <div class="box big-box">🤖 Fast delivery</div>
-  </div>
-</section>
+const particles = [];
+const particleCount = window.innerWidth < 768 ? 40 : 80; // mobiel minder, desktop meer
+const maxDist = 200;
 
-<section id="projects" class="reveal">
-  <h2>Projects</h2>
-  <div class="grid column">
+const mouse = { x: null, y: null };
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
-    <!-- Project 1 -->
-    <div class="box project">
-      🤖 <strong>Eindhoven, The Netherlands</strong><br>
-      Multifunctionele custom bot gemaakt om alle andere soorten bots te vervangen.<br><br>
-      <a href="https://discord.gg/ssYbc6J9C2" target="_blank" rel="noopener" class="discord-btn">Join Discord</a>
-    </div>
+class Particle {
+  constructor() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 1;
+    this.vy = (Math.random() - 0.5) * 1;
+    this.radius = 2 + Math.random() * 2;
+  }
 
-    <!-- Project 2 -->
-    <div class="box project">
-      🌐 <strong>ZyRobots Portfolio Website</strong><br>
-      Deze website zelf, clean en futuristisch met animaties en interactieve elementen.
-    </div>
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(37,99,235,0.9)';
+    ctx.shadowColor = 'rgba(37,99,235,0.7)';
+    ctx.shadowBlur = 5;
+    ctx.fill();
+  }
 
-  </div>
-</section>
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
 
-<!-- Discord footer -->
-<div class="discord-footer">
-  <a href="https://discord.gg/C7gQ7DQrEx" target="_blank" rel="noopener">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord Logo">
-  </a>
-</div>
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
 
-<section id="contact" class="reveal">
-  <h2>Contact</h2>
-  <p>Zyrobots@outlook.com</p>
-</section>
+    this.draw();
+  }
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+// Connect all particles + mouse
+function connectParticles() {
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a + 1; b < particles.length; b++) {
+      let dx = particles[a].x - particles[b].x;
+      let dy = particles[a].y - particles[b].y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < maxDist) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
+    }
+    // connect to mouse
+    if(mouse.x && mouse.y){
+      let dx = particles[a].x - mouse.x;
+      let dy = particles[a].y - mouse.y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < maxDist){
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0,0,width,height);
+  particles.forEach(p => p.update());
+  connectParticles();
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
