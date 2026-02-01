@@ -34,7 +34,7 @@ let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = window.innerWidth < 768 ? 40 : 80; // mobiel minder, desktop meer
+const particleCount = window.innerWidth < 768 ? 40 : 80;
 const maxDist = 200;
 
 const mouse = { x: null, y: null };
@@ -70,16 +70,15 @@ class Particle {
   }
 }
 
-for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
-// Connect all particles + mouse
 function connectParticles() {
-  for (let a = 0; a < particles.length; a++) {
-    for (let b = a + 1; b < particles.length; b++) {
+  for (let a=0; a<particles.length; a++){
+    for (let b=a+1; b<particles.length; b++){
       let dx = particles[a].x - particles[b].x;
       let dy = particles[a].y - particles[b].y;
       let dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < maxDist) {
+      if(dist < maxDist){
         ctx.beginPath();
         ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
         ctx.lineWidth = 1;
@@ -88,7 +87,6 @@ function connectParticles() {
         ctx.stroke();
       }
     }
-    // connect to mouse
     if(mouse.x && mouse.y){
       let dx = particles[a].x - mouse.x;
       let dy = particles[a].y - mouse.y;
