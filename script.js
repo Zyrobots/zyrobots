@@ -34,7 +34,8 @@ let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = 80;
+const particleCount = 80; 
+const maxDist = 200; // grotere afstand zodat alles verbonden lijkt
 
 const mouse = { x: null, y: null };
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -69,41 +70,47 @@ class Particle {
   }
 }
 
-// init particles
 for (let i=0;i<particleCount;i++) particles.push(new Particle());
 
-// connect ALL particles
+// connect all particles + mouse
 function connectParticles() {
   for (let a=0; a<particles.length; a++){
     for (let b=a+1; b<particles.length; b++){
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(37,99,235,0.15)'; // subtiel
-      ctx.lineWidth = 1;
-      ctx.moveTo(particles[a].x, particles[a].y);
-      ctx.lineTo(particles[b].x, particles[b].y);
-      ctx.stroke();
+      let dx = particles[a].x - particles[b].x;
+      let dy = particles[a].y - particles[b].y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < maxDist){
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
     }
-
     // connect to mouse
     if(mouse.x && mouse.y){
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(37,99,235,0.25)';
-      ctx.lineWidth = 1;
-      ctx.moveTo(particles[a].x, particles[a].y);
-      ctx.lineTo(mouse.x, mouse.y);
-      ctx.stroke();
+      let dx = particles[a].x - mouse.x;
+      let dy = particles[a].y - mouse.y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < maxDist){
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(37,99,235,${1 - dist/maxDist})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
     }
   }
 }
 
-// animate
 function animate() {
   ctx.clearRect(0,0,width,height);
   particles.forEach(p => p.update());
   connectParticles();
   requestAnimationFrame(animate);
 }
-
 animate();
 
 window.addEventListener('resize', () => {
